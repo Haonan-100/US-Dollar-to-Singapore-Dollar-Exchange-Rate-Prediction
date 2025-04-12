@@ -51,13 +51,11 @@ The main goals of this project are:
 2. **Market Indices**: S&P 500 (US) and STI (Singapore), Gold Price, Dollar Index (DXI). Additional data sourced from Yahoo Finance.
 3. **Public News Data**: Over 200k+ headlines or articles related to the USD and SGD, labeled with sentiment. Source: [Kaggle](https://www.kaggle.com/)
 4. **Proprietary CSV/Parquet Files**: 
-   - `selected_data.parquet`
-   - `Database2.csv`
-   - `non_zero_impact_score_examples.csv`
+   - `selected_data.parquet` (Due to the size, the data can be find in kaggle)
+   - `Dataset.xlsx`
+   - `Dataset_1990-2020.xlsx`
+   - `Processed_Data.csv`
    - More details in `Models` and `Data`.
-
----
-
 
 ---
 
@@ -78,16 +76,31 @@ Below is a non-exhaustive list of required Python libraries:
 Make sure you install all dependencies via `pip install -r requirements.txt` or manually.
 
 ---
-
 ## Project Structure
-.
-├── Total.py                              # Main script integrating data prep, sentiment analysis, RF, LSTM, Particle Filter
-├── Report.pdf                            # Project report with theoretical background and results discussion
-├── selected_data.parquet                 # Example input data (if provided)
-├── Database2.csv                         # Another dataset for model training
-├── non_zero_impact_score_examples.csv    # Sample sentiment-labeled output data
-├── requirements.txt                      # Optional: list of dependencies
-└── README.md                             # Project documentation
+
+This repository is organized as follows:
+
+### Data
+- **Dataset.xlsx**: Initial raw dataset.
+- **Dataset_1990-2020.xlsx**: Dataset covering the years 1990 to 2020.
+- **Processed_Data.csv**: Cleaned and processed data ready for analysis.
+
+### Model
+- **1 Data Cleaning.ipynb**: Notebook for initial data cleaning steps.
+- **2 Correlation Test.ipynb**: Analysis notebook for testing data correlations.
+- **3 Other Model Check.ipynb**: Notebook for evaluating additional models.
+- **4 Feature Choose.ipynb**: Feature selection notebook.
+- **5 NLP.ipynb**: Notebook for Natural Language Processing tasks.
+- **6 LSTM.ipynb**: Notebook for LSTM model development.
+
+### Report
+- **Code Output.pdf**: PDF containing outputs from code execution.
+- **Report.pdf**: Detailed project report discussing findings and methodologies.
+
+### Others
+- **LICENSE.md**: License details for the project.
+- **README.md**: Documentation for navigating and understanding the project.
+
 
 ---
 
@@ -117,6 +130,7 @@ Ensure that your Python environment has all dependencies installed (`pip install
 - Conduct text analysis using VADER Sentiment Analyzer.
 - Calculate sentiment scores and derive an "impact score" to quantify the influence of financial news on exchange rates.
 - Integrate sentiment scores into your feature set.
+- More detial process on Xiao, Q., & Ihnaini, B. (2023). *Stock trend prediction using sentiment analysis*.
 
 ### 6. LSTM Modeling
 This notebook focuses specifically on building and fine-tuning an LSTM-based predictive model. Key steps include:
