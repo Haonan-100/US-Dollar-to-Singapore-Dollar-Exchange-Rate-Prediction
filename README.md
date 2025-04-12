@@ -168,6 +168,11 @@ This notebook focuses specifically on building and fine-tuning an LSTM-based pre
 - **LSTM with Attention** outperforms a simple baseline (T-3 shift) with a lower MAE, demonstrating its ability to capture complex temporal dependencies.
 - **Particle Filter** helps illustrate market volatility in a rolling context and adapts predictions in near real-time.
 
+### Visualizations
+
+![Random Forest Results](https://github.com/Haonan-100/US-Dollar-to-Singapore-Dollar-Exchange-Rate-Prediction/blob/main/photo/01.png)
+![LSTM Results](https://github.com/Haonan-100/US-Dollar-to-Singapore-Dollar-Exchange-Rate-Prediction/blob/main/photo/02.png)
+
 ---
 
 ## Future Work
