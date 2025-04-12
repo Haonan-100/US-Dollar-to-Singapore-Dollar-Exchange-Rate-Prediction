@@ -9,11 +9,12 @@ This repository contains a comprehensive project aimed at predicting the USD/SGD
 - [Dependencies](#dependencies)
 - [Project Structure](#project-structure)
 - [Usage](#usage)
-  - [1. Data Preparation](#1-data-preparation)
-  - [2. Sentiment Analysis](#2-sentiment-analysis)
-  - [3. Random Forest Regression](#3-random-forest-regression)
-  - [4. LSTM Model with Attention](#4-lstm-model-with-attention)
-  - [5. Particle Filter Predictions](#5-particle-filter-predictions)
+  - [1. Data Cleaning](#1.-Data-Cleaning)
+  - [2. Correlation Testing](#2.-Correlation-Testing)
+  - [3. Model Evaluation](#3.-Model-Evaluation)
+  - [4. Feature Selection](#4.-Feature-Selection)
+  - [5. Sentiment Analysis with NLP](#5.-Sentiment-Analysis-with-NLP)
+  - [6. LSTM Modeling](#6.-LSTM-Modeling)
 - [Results](#results)
 - [Future Work](#future-work)
 - [References](#references)
@@ -46,13 +47,16 @@ The main goals of this project are:
 ## Data Sources
 
 1. **World Bank / Yahoo Finance / FRED**: Main source for macroeconomic indicators such as GDP, interest rates, inflation data, and daily exchange rates for USD/EUR/JPY/CNY.
-2. **Market Indices**: S&P 500 (US) and STI (Singapore), Gold Price, Dollar Index (DXI).
-3. **Public News Data**: Over 200k+ headlines or articles related to the USD and SGD, labeled with sentiment.
+2. **Market Indices**: S&P 500 (US) and STI (Singapore), Gold Price, Dollar Index (DXI). Additional data sourced from Yahoo Finance.
+3. **Public News Data**: Over 200k+ headlines or articles related to the USD and SGD, labeled with sentiment. Source: [Kaggle](https://www.kaggle.com/)
 4. **Proprietary CSV/Parquet Files**: 
    - `selected_data.parquet`
    - `Database2.csv`
    - `non_zero_impact_score_examples.csv`
-   - More details in `Total.py`.
+   - More details in `Models` and `Data`.
+
+---
+
 
 ---
 
@@ -88,26 +92,58 @@ Make sure you install all dependencies via `pip install -r requirements.txt` or 
 
 ## Usage
 
-### 1. Data Preparation
-- Ensure your data files (e.g., `selected_data.parquet` and `Database2.csv`) are in the correct paths specified inside `Total.py`.
-- The code handles feature creation such as rolling means (`ExchangeRate_Short_MA`, `ExchangeRate_Long_MA`) and log returns.
+Ensure that your Python environment has all dependencies installed (`pip install -r requirements.txt`). Then follow the notebooks in sequence:
 
-### 2. Sentiment Analysis
-- The script uses **VADER** (from NLTK) and can incorporate finance-specific keywords or external models like **FinBERT**.
-- Sentiment scores are combined with keyword context to compute an `impact_score` for USD or SGD.
+### 1. Data Cleaning
+- Load and preprocess raw financial data from various sources.
+- Handle missing values and anomalies.
+- Compute technical indicators like moving averages and log returns.
 
-### 3. Random Forest Regression
-- A `RandomForestRegressor` is trained on scaled features to predict scaled exchange rates.
-- Feature importance metrics provide insight into which economic indicators matter most (e.g., DXI, STI, GoldPrice).
+### 2. Correlation Testing
+- Perform statistical correlation tests (e.g., Pearson's correlation, Spearman’s rank) to determine relationships among variables.
+- Results help narrow down potential predictors.
 
-### 4. LSTM Model with Attention
-- Constructs a multi-layer **BiLSTM** with dropout, batch normalization, and an attention mechanism.
-- Trained using a rolling-window (T-3) approach to capture recent market trends.
-- Evaluated on metrics such as MSE, RMSE, MAE, and R^2.
+### 3. Model Evaluation
+- Evaluate traditional regression and ensemble models (Linear Regression, Ridge, Lasso, ElasticNet, Random Forest).
+- Establish baseline performance metrics (RMSE, MAE, R²).
 
-### 5. Particle Filter Predictions
-- Uses predicted LSTM outputs combined with a particle filter to track log-return dynamics over time.
-- Provides a visualization of how forecasted trajectories compare to actual values, highlighting model confidence.
+### 4. Feature Selection
+- Use Variance Inflation Factor (VIF) to detect multicollinearity among independent variables.
+- Apply Permutation Importance to identify the most impactful predictors for modeling.
+- Narrow down optimal feature sets based on these analyses.
+
+### 5. Sentiment Analysis with NLP
+- Conduct text analysis using VADER Sentiment Analyzer.
+- Calculate sentiment scores and derive an "impact score" to quantify the influence of financial news on exchange rates.
+- Integrate sentiment scores into your feature set.
+
+### 6. LSTM Modeling
+This notebook focuses specifically on building and fine-tuning an LSTM-based predictive model. Key steps include:
+
+- **Data Preparation**:  
+  Prepare sequential datasets suitable for LSTM input, normalizing features and targets separately.
+  
+- **Model Architecture**:  
+  Develop a multi-layer Bi-directional LSTM with attention layers:
+  - Input layer configured for sequential data.
+  - Multiple stacked Bi-directional LSTM layers with Dropout (to prevent overfitting) and Batch Normalization (for stability and faster training).
+  - Attention mechanism to improve sequence modeling by focusing on relevant temporal features.
+  - Final Dense output layer producing exchange rate forecasts.
+
+- **Training and Validation**:  
+  Train with an adaptive optimizer (Adam), monitoring validation loss to trigger early stopping and prevent overfitting.
+
+- **Evaluation**:  
+  Analyze performance using various metrics including RMSE, MAE, and R² scores.  
+  Compare LSTM results against baseline predictions and assess the improvement.
+
+- **Visualization**:  
+  Plot predicted versus actual exchange rates over time to visualize model accuracy and reliability clearly.
+
+- **Interpretation**:  
+  Discuss attention weights and feature importance, highlighting how certain features contribute significantly to predictive accuracy.
+
+
 
 ---
 
