@@ -9,15 +9,16 @@ This repository contains a comprehensive project aimed at predicting the USD/SGD
 - [Dependencies](#dependencies)
 - [Project Structure](#project-structure)
 - [Usage](#usage)
-  - [1. Data Cleaning](#1.-Data-Cleaning)
-  - [2. Correlation Testing](#2.-Correlation-Testing)
-  - [3. Model Evaluation](#3.-Model-Evaluation)
-  - [4. Feature Selection](#4.-Feature-Selection)
-  - [5. Sentiment Analysis with NLP](#5.-Sentiment-Analysis-with-NLP)
-  - [6. LSTM Modeling](#6.-LSTM-Modeling)
+  - [1. Data Cleaning](#1-data-cleaning)
+  - [2. Correlation Testing](#2-correlation-testing)
+  - [3. Model Evaluation](#3-model-evaluation)
+  - [4. Feature Selection](#4-feature-selection)
+  - [5. Sentiment Analysis with NLP](#5-sentiment-analysis-with-nlp)
+  - [6. LSTM Modeling](#6-lstm-modeling)
 - [Results](#results)
 - [Future Work](#future-work)
 - [References](#references)
+
 
 ---
 
